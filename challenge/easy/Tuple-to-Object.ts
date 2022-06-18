@@ -21,7 +21,7 @@
 
 /* _____________ Your Code Here _____________ */
 
-type TupleToObject<T extends readonly any[]> = { [V in T[number]]: V }
+type TupleToObject<T extends readonly (keyof any)[]> = { [V in T[number]]: V }
 
 
 /* _____________ Test Cases _____________ */
@@ -37,6 +37,7 @@ type cases = [
   Expect<Equal<TupleToObject<typeof tupleMix>, { 1: 1; '2': '2'; 3: 3; '4': '4' }>>,
 ]
 
+// @ts-expect-error
 type error = TupleToObject<[[1, 2], {}]>
 
 
